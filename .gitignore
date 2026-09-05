@@ -1,0 +1,13 @@
+__pycache__/
+*.pyc
+rag_assistant.db
+
+# Local tooling state, not part of the project
+.claude/
+
+# Old comment backups, superseded by git history
+backup_comments/
+
+# Program task materials, not part of the deliverable
+BASLANGIC_PROMPT.md
+Summer School Foundry Local Plan.pdf

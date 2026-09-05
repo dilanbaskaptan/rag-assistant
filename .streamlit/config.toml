@@ -1,0 +1,13 @@
+# .streamlit/config.toml
+# Streamlit'in varsayilan (mor-kirmizi) temasini, projenin renk paletiyle degistiriyoruz.
+# Bu, Streamlit'in resmi tema sistemi - buton, input, arka plan gibi tum standart
+# bilesenleri otomatik olarak bu renklerle boyar. Daha ince detaylar (sohbet balonu
+# kenarliklari, kaynak etiketi rengi gibi) icin app.py'de ek CSS kullaniyoruz.
+
+[theme]
+base = "light"
+primaryColor = "#3368A0"          # butonlar, secili sekmeler, odak (focus) rengi
+backgroundColor = "#F2EFE7"       # genel sayfa arka plani
+secondaryBackgroundColor = "#C8DFDB"  # kenar cubugu (sidebar) ve input arka plani
+textColor = "#2E2E2E"             # okunabilirlik icin notr koyu gri (palette'te metin rengi yoktu)
+font = "sans serif"
