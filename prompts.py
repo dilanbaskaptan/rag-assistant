@@ -10,7 +10,7 @@ from config import (
     ensure_model_ready,
     get_openai_client,
 )
-from retrieval import find_relevant
+from retrieval import get_top_chunks
 
 # Rules the model must follow on every request.
 #
@@ -40,7 +40,7 @@ def answer_query(question: str, top_k: int = TOP_K) -> dict:
 
     Returns {"answer": str, "sources": list[str]}.
     """
-    relevant_chunks = find_relevant(question, top_k=top_k)
+    relevant_chunks = get_top_chunks(question, top_k=top_k)
 
     if not relevant_chunks:
         return {

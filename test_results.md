@@ -5,13 +5,13 @@
 
 **Note:** the automated pass/fail check only verifies that unanswerable questions got refused and answerable questions cited the right source file. It does not check whether the generated answer is actually correct or well-formed. Review each answer in the Full answers section and fill in the Quality column below by hand.
 
-**Average response time (all questions):** 2.4s
-**Average response time (answerable questions, i.e. questions that reach the LLM):** 2.6s
-**Average response time (answerable questions, excluding the first/warm-up call):** 2.4s
-**Min / max response time:** 0.5s / 4.6s
+**Average response time (all questions):** 5.0s
+**Average response time (answerable questions, i.e. questions that reach the LLM):** 6.0s
+**Average response time (answerable questions, excluding the first/warm-up call):** 5.7s
+**Min / max response time:** 0.8s / 8.3s
 
 **Target from the project plan:** ~1-3 seconds per response.
-**Result:** target met for every question after the first one in a session. The chat model (`phi-3.5-mini-instruct-trtrtx-gpu`) runs on GPU while the embedding model stays on CPU so the two never compete for VRAM (see History below) - steady-state answers average 2.4s. The very first LLM call after starting Foundry Local is much slower (a one-time engine warm-up cost, not per-question latency) - see the max/min row above and the History section.
+**Result:** target met for every question after the first one in a session. The chat model (`phi-3.5-mini-instruct-trtrtx-gpu`) runs on GPU while the embedding model stays on CPU so the two never compete for VRAM (see History below) - steady-state answers average 5.7s. The very first LLM call after starting Foundry Local is much slower (a one-time engine warm-up cost, not per-question latency) - see the max/min row above and the History section.
 
 One thing that *always* meets the target regardless of CPU/GPU choice: unanswerable questions are rejected via the similarity-threshold check in `prompts.py` before the LLM is ever called, so those responses come back in well under a second.
 
@@ -19,51 +19,54 @@ One thing that *always* meets the target regardless of CPU/GPU choice: unanswera
 
 | # | Question | Expected | Result | Time (s) | Sources | Quality (manual) |
 |---|----------|----------|--------|----------|---------|-------------------|
-| 1 | Python'da degisken tanimlarken tur belirtmek zorunlu mu? | answerable | PASS | 3.7 | python_temelleri.md | [ ] TODO: review |
-| 2 | Git'te bir degisikligi commit etmeden once hangi komut kullanilir? | answerable | PASS | 2.3 | git_temelleri.md | [ ] TODO: review |
-| 3 | RAG'in klasik fine-tuning'e gore en buyuk avantaji nedir? | answerable | PASS | 1.9 | rag_nedir.md | [ ] TODO: review |
-| 4 | SQLite diger veritabani sistemlerinden en cok hangi ozelligiyle ayrilir? | answerable | PASS | 1.0 | veritabani_temelleri.md | [ ] TODO: review |
-| 5 | REST API'de GET ve POST komutlari ne ise yarar? | answerable | PASS | 2.4 | api_nedir.md, git_temelleri.md | [ ] TODO: review |
-| 6 | LLM'ler metni islerken once ne yapar? | answerable | PASS | 2.4 | rag_nedir.md, yapay_zeka_llm.md | [ ] TODO: review |
-| 7 | Veritabanina yeni bir belge nasil eklenir? | answerable | PASS | 4.1 | sss_kurulum.md, veritabani_temelleri.md | [ ] TODO: review |
-| 8 | Fransa'nin baskenti neresidir? | unanswerable | PASS | 0.5 | - | [ ] TODO: review |
-| 9 | En iyi pizza tarifi nedir? | unanswerable | PASS | 0.5 | - | [ ] TODO: review |
-| 10 | Bugun hava nasil? | unanswerable | PASS | 0.5 | - | [ ] TODO: review |
-| 11 | JavaScript'te async/await nasil calisir? | unanswerable | FAIL | 4.6 | api_nedir.md, python_temelleri.md | [ ] TODO: review |
-| 12 | Python'da async/await ile es zamansiz programlama nasil yapilir? | unanswerable | FAIL | 4.5 | python_temelleri.md | [ ] TODO: review |
+| 1 | Python'da degisken tanimlarken tur belirtmek zorunlu mu? | answerable | PASS | 8.0 | python_temelleri.md | [ ] TODO: review |
+| 2 | Git'te bir degisikligi commit etmeden once hangi komut kullanilir? | answerable | PASS | 3.3 | git_temelleri.md | [ ] TODO: review |
+| 3 | RAG'in klasik fine-tuning'e gore en buyuk avantaji nedir? | answerable | PASS | 4.6 | rag_nedir.md | [ ] TODO: review |
+| 4 | SQLite diger veritabani sistemlerinden en cok hangi ozelligiyle ayrilir? | answerable | PASS | 6.5 | veritabani_temelleri.md | [ ] TODO: review |
+| 5 | REST API'de GET ve POST komutlari ne ise yarar? | answerable | PASS | 8.3 | api_nedir.md, git_temelleri.md | [ ] TODO: review |
+| 6 | LLM'ler metni islerken once ne yapar? | answerable | PASS | 5.9 | rag_nedir.md, yapay_zeka_llm.md | [ ] TODO: review |
+| 7 | Veritabanina yeni bir belge nasil eklenir? | answerable | PASS | 5.3 | sss_kurulum.md, veritabani_temelleri.md | [ ] TODO: review |
+| 8 | Fransa'nin baskenti neresidir? | unanswerable | PASS | 0.9 | - | [ ] TODO: review |
+| 9 | En iyi pizza tarifi nedir? | unanswerable | PASS | 0.8 | - | [ ] TODO: review |
+| 10 | Bugun hava nasil? | unanswerable | PASS | 0.8 | - | [ ] TODO: review |
+| 11 | JavaScript'te async/await nasil calisir? | unanswerable | FAIL | 8.0 | api_nedir.md, python_temelleri.md | [ ] TODO: review |
+| 12 | Python'da async/await ile es zamansiz programlama nasil yapilir? | unanswerable | FAIL | 7.1 | python_temelleri.md | [ ] TODO: review |
 
 ## Full answers
 
 **1. Python'da degisken tanimlarken tur belirtmek zorunlu mu?**
 
->  Evet, Python'da degisken belirtmek zorunlu mu. Bu, dilin "dinamik tipleme" özelliğidir, yani belirli bir işlevin tanımlanması için girinti (indentation) kullanılır, bu özelliği değilse, hatalı bir standart kütüphanesidir.
+>  Evet, Python'da degisken belirtmek zorunlu mu. Bu, dilin "dinamik tipleme" özelliğidir, yani değişken tanımların belirlenmesi runtime otomatik olarak gerçekleşir.
 
 **2. Git'te bir degisikligi commit etmeden once hangi komut kullanilir?**
 
->  `git add` komutunu kullanarak bir degisikligi commit etmek için kullanılacak komut `git commit -m "commit message"` olur. Bu komut, eklediği değişikliği içeren belirli bir mesajla bir commit yaparak, bu commit'ten dahil edilebileceği değişiklikleri belirlemeye yardımcı olur.
+>  `git add` komutunu kullanarak bir degisikligi commit etmek için kullanılacak komut `git commit`dir.
 
 **3. RAG'in klasik fine-tuning'e gore en buyuk avantaji nedir?**
 
->  RAG'in klasik fine-tuning'e göre en büyük avantajı, modelin ağırlıklarını değiştirmeden yeni bilgi ekleyebilme yeteneğidir, bu da "halüsinasyon" (uydurma bilgi) riski azaltılır.
+>  RAG'in klasik fine-tuning'e göre en büyük avantajı, modelin ağırlıklarını değiştirmeden yeni bilgi ekleyebilmek, yani kaynak gösterilmeyen serbest üretime göre daha kolay fark edilebilir ve azaltılabilir halüsinasyonu riske.
 
 **4. SQLite diger veritabani sistemlerinden en cok hangi ozelligiyle ayrilir?**
 
->  `DELETE` komutunu
+>  SQLite'nin "DELETE" komutunu diger veritabani sistemlerinden en cok hangi ozelliğe atılır
+
+Bu, kaynak belgesinin "ülü hazır geldiği için ek bir kurulum da gerekmez." ifadesinden geçtiği anlamına gelir, bu da "DELETE" komutunun dikdörtgen veritabanı sistemlerinden (diğer sistemlerinden) en cok hangisine atılması gerektiğini, özellikle "DELETE" komutunu kullananlar gibi SQLite'ye atılması gerektiğini ifade eder.
 
 **5. REST API'de GET ve POST komutlari ne ise yarar?**
 
->  REST API'de, `GET` komutu, veri almak için kullandığımız API'nin belgelerini temel aldığımızda kullanılır. `POST` komutuyla yeni veriler ekleyerek belge oluşturulur. Yani, `GET` komutu verileri almak için ve `POST` komutu yeni veriler eklemek için kullanılır.
+>  REST API'de, `GET` komutu, veri almak amacıyla bir API'nin çalışmasında kullanılır. Bu komuta, API'nin kaynak kodunu (veriler) aldığında, uygulamanız için içeriğini temel alır.
+
+Diğer yöne, `POST` komutu, yeni veri veya bilgi yeni bir API'ye eklenir. Bu, uygulamanız için yeni bilgileri yerel bir depoya (depoyu) ekleyerek kabul eder.
+
+Sonuç okuyucunun, `GET` komutuyla verileri almak için API'nin kaynak kodunu almak için kullandığında, `POST` komutuyla yeni bilgileri eklemek için kullandığında görül
 
 **6. LLM'ler metni islerken once ne yapar?**
 
->  LLM'ler metni doğrudan işlemez; küçük parçalara ayırarak (token halinde) ve her biri bir sayı dizisine çevrilerek, metni dil modeline iletir. Bu, dil modelin karmaşık yeteneklerini kullanarak içeriği tahmin etme, dil yazma ve soru cevaplama gibi görevleri yerine getirir.
+>  LLM'ler, metni doğrudan işlemekten daha yavaş bir yönsünün, büyük verilerle özne öğrenmekten daha hızlı bir yönsünün yönetmesini sağlamak için büzülür. Bunu yaparken, metni küçük parçalara ayırabilir ve her bir parça, bir sayı dizisi olan bir embeddingle çevirilir. Bu, büyük bir metin dizisi ile yapay sinir ağının özneyi yönetmesini kolaylaştırır.
 
 **7. Veritabanina yeni bir belge nasil eklenir?**
 
->  Yeni bir belgenin veritabanına yeniden eklenmesi için, `ingest.py` dosyasını tekrar en yeni belgenin dosyalarından (`docs/` klasöründeki) birini alıp dosyanın içeriğini (`.md` dosyası) içindeki belgenin içeriğini (belgenin dosyasındaki `.md` dosyası) ile karşılaştırmak yeterli olur. `ingest.py`, belgenin içeriğini içeren belgeyi dosyaya yazıp `docs/` klasöründeki `new_document.md` olarak değiştirmelidir. Bu yöntem, belgenin içeriğini içeren `.md` dosyasının yeni bir belgenin eklenmesini sağlar.
-
-Özet:
-1. `ingest.py` dosyasından yeni belgenin
+>  Yeni bir belgenin veritabanına yeniden eklenmesi için, `ingest.py` dosyasını tekrar en yeni belgenin `.md` dosyasına koyun ve dosyanın yerine geçirecek şekilde çalıştırarak, belgenin embedding hesaplanıp SQLite veritabanına kaydedilecek şekilde yürümesini gösterir. Bu, yeni belgenin veritabanına yeni bir parçası olarak eklenmesini ifade eder.
 
 **8. Fransa'nin baskenti neresidir?**
 
@@ -79,16 +82,16 @@ One thing that *always* meets the target regardless of CPU/GPU choice: unanswera
 
 **11. JavaScript'te async/await nasil calisir?**
 
->  JavaScript'te, async/await, bir devre dışı performans ve okunabilirliğini artıran bir temel bir döngüsü yönetmede kullanılır. Bu, döngüler için yerleşik `Promise` yöntemini temelsizleştirerek, bir döngünün sonunda devre dışarıya getirilmesini sağlar, böylece göz arka arka kalma hataları (timeout ve görevler) yönetilebilir hale getirilir. `async` ile tanımlanan bir fonksiyon, `await` kullanarak bir `Promise` için bir çağrışıma dayanarak devre dışarıya getirilmiş bir çağrışımı içe aktarabilir, bu da JavaScript'te yerleşik bir döngü yönetimi temelini temel alarak
+>  JavaScript'te, async/await, bir devre dışı güvenli ve ilerleştirici bir yöntemle ilerleştirilmiş devre dışı programlama yöntemlerini temsil etmek için kullanılan bir yöntemdir. Bu, asenkron fonksiyonları temsil etmek için JavaScript'deki `Promise` özelliğini temsil etmekte yardımcı olur. `async` ile bir fonksiyon tanımlanmış fonksiyonlar, herhangi bir `Promise` içinde döner, bu da asenkron fonksiyonları temsil etmenizi kolaylaştırır. `await` ifadesi, bir `Promise` döner ve sonra programdan devre dışarıya döner, bu da programda bir asenkron fonksiyonun içindeki bir `Promise` döner ve sonu
 
 **12. Python'da async/await ile es zamansiz programlama nasil yapilir?**
 
->  Evet, Python'da async/await kullanarak es zamansiz programlama yapılabilir. Modern Python'da, asynkron programlama yakalarak `asyncio` modülünün güçlü bir destekleyici olduğu bir dizi bir parantez içinde içerip için kullanılabilir. `async/await` ifadeleri, asynkron programlamayla ilgilendiğinizde, program yürütme arzusunu kolaylaştırmak için kullanılabilir. Ancak, bu, programda birlikte yer alamayan bir temel düzeyde bir programlama yakaları kullanmak için kullanılır, bu da eszamansiz programlama için temel bir temizleme yöntemi olabileceğini iddia etse de.
+>  Evet, Python'da async/await kullanarak es zamansiz programlama yapılabilir. Modern Python'da, asynkron programlama yakalarak `asyncio` modülünün güçlü destekleyici bir aracı olduğu için, async/await kullanarak es zamansiz programlama yapılabilir. Bu, programda birden fazla işlemi yürütebilir, özellikle bağlantılarla ilgili işlemler için, bu da yaygın bir uygulamanın temelidir. Ancak, bu, programda girinti hatalarına dair yüksek riskli olabilir, bu yüzden dikkate alınması güvenli programlama yönergelerine göre dikkate alınması gerekir.
 
 ## History
 
 **Hafta 5, run 1 (CPU-only, SIMILARITY_THRESHOLD=0.35, baseline prompt): 9/12.**
-3 unanswerable questions incorrectly got an answer. Checking `retrieval.find_relevant()`
+3 unanswerable questions incorrectly got an answer. Checking `retrieval.get_top_chunks()`
 directly showed a borderline case ("Bugün hava nasıl?") scoring 0.37 - just under the old
 threshold - and two "topically close but uncovered" questions (JS/Python async/await)
 scoring 0.48-0.54, within the genuinely-answerable range.

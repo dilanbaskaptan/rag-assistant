@@ -33,7 +33,7 @@ def cosine_similarity(vector_a: list[float], vector_b: list[float]) -> float:
     return dot_product / (magnitude_a * magnitude_b)
 
 
-def find_relevant(query: str, top_k: int = TOP_K) -> list[dict]:
+def get_top_chunks(query: str, top_k: int = TOP_K) -> list[dict]:
     """Return the top_k stored chunks most similar to the query.
 
     Embeds the query, scores every stored chunk by cosine similarity, and

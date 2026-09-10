@@ -68,7 +68,7 @@ HISTORY_NOTES = """
 ## History
 
 **Hafta 5, run 1 (CPU-only, SIMILARITY_THRESHOLD=0.35, baseline prompt): 9/12.**
-3 unanswerable questions incorrectly got an answer. Checking `retrieval.find_relevant()`
+3 unanswerable questions incorrectly got an answer. Checking `retrieval.get_top_chunks()`
 directly showed a borderline case ("Bugün hava nasıl?") scoring 0.37 - just under the old
 threshold - and two "topically close but uncovered" questions (JS/Python async/await)
 scoring 0.48-0.54, within the genuinely-answerable range.
