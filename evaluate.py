@@ -167,8 +167,7 @@ def write_report(results: list[dict], path: str = "test_results.md") -> None:
         "**Note:** the automated pass/fail check only verifies that unanswerable "
         "questions got refused and answerable questions cited the right source file. "
         "It does not check whether the generated answer is actually correct or "
-        "well-formed. Review each answer in the Full answers section and fill in the "
-        "Quality column below by hand.",
+        "well-formed - see the Full answers section for the raw output.",
         "",
         f"**Average response time (all questions):** {avg_time:.1f}s",
         f"**Average response time (answerable questions, i.e. questions that reach the LLM):** {avg_answerable_time:.1f}s",
@@ -184,8 +183,8 @@ def write_report(results: list[dict], path: str = "test_results.md") -> None:
         "",
         "## Details",
         "",
-        "| # | Question | Expected | Result | Time (s) | Sources | Quality (manual) |",
-        "|---|----------|----------|--------|----------|---------|-------------------|",
+        "| # | Question | Expected | Result | Time (s) | Sources |",
+        "|---|----------|----------|--------|----------|---------|",
     ]
 
     for i, r in enumerate(results, start=1):
@@ -193,7 +192,7 @@ def write_report(results: list[dict], path: str = "test_results.md") -> None:
         sources = ", ".join(r["sources"]) if r["sources"] else "-"
         lines.append(
             f"| {i} | {r['question']} | {r['expected_type']} | {status} | "
-            f"{r['elapsed_seconds']:.1f} | {sources} | [ ] TODO: review |"
+            f"{r['elapsed_seconds']:.1f} | {sources} |"
         )
 
     lines.append("")

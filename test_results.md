@@ -3,7 +3,7 @@
 **Chat model:** `phi-3.5-mini-instruct-trtrtx-gpu`
 **Pass rate:** 10/12 (automated check only - see note below)
 
-**Note:** the automated pass/fail check only verifies that unanswerable questions got refused and answerable questions cited the right source file. It does not check whether the generated answer is actually correct or well-formed. Review each answer in the Full answers section and fill in the Quality column below by hand.
+**Note:** the automated pass/fail check only verifies that unanswerable questions got refused and answerable questions cited the right source file. It does not check whether the generated answer is actually correct or well-formed - see the Full answers section for the raw output.
 
 **Average response time (all questions):** 5.0s
 **Average response time (answerable questions, i.e. questions that reach the LLM):** 6.0s
@@ -17,20 +17,20 @@ One thing that *always* meets the target regardless of CPU/GPU choice: unanswera
 
 ## Details
 
-| # | Question | Expected | Result | Time (s) | Sources | Quality (manual) |
-|---|----------|----------|--------|----------|---------|-------------------|
-| 1 | Python'da degisken tanimlarken tur belirtmek zorunlu mu? | answerable | PASS | 8.0 | python_temelleri.md | [ ] TODO: review |
-| 2 | Git'te bir degisikligi commit etmeden once hangi komut kullanilir? | answerable | PASS | 3.3 | git_temelleri.md | [ ] TODO: review |
-| 3 | RAG'in klasik fine-tuning'e gore en buyuk avantaji nedir? | answerable | PASS | 4.6 | rag_nedir.md | [ ] TODO: review |
-| 4 | SQLite diger veritabani sistemlerinden en cok hangi ozelligiyle ayrilir? | answerable | PASS | 6.5 | veritabani_temelleri.md | [ ] TODO: review |
-| 5 | REST API'de GET ve POST komutlari ne ise yarar? | answerable | PASS | 8.3 | api_nedir.md, git_temelleri.md | [ ] TODO: review |
-| 6 | LLM'ler metni islerken once ne yapar? | answerable | PASS | 5.9 | rag_nedir.md, yapay_zeka_llm.md | [ ] TODO: review |
-| 7 | Veritabanina yeni bir belge nasil eklenir? | answerable | PASS | 5.3 | sss_kurulum.md, veritabani_temelleri.md | [ ] TODO: review |
-| 8 | Fransa'nin baskenti neresidir? | unanswerable | PASS | 0.9 | - | [ ] TODO: review |
-| 9 | En iyi pizza tarifi nedir? | unanswerable | PASS | 0.8 | - | [ ] TODO: review |
-| 10 | Bugun hava nasil? | unanswerable | PASS | 0.8 | - | [ ] TODO: review |
-| 11 | JavaScript'te async/await nasil calisir? | unanswerable | FAIL | 8.0 | api_nedir.md, python_temelleri.md | [ ] TODO: review |
-| 12 | Python'da async/await ile es zamansiz programlama nasil yapilir? | unanswerable | FAIL | 7.1 | python_temelleri.md | [ ] TODO: review |
+| # | Question | Expected | Result | Time (s) | Sources |
+|---|----------|----------|--------|----------|---------|
+| 1 | Python'da degisken tanimlarken tur belirtmek zorunlu mu? | answerable | PASS | 8.0 | python_temelleri.md |
+| 2 | Git'te bir degisikligi commit etmeden once hangi komut kullanilir? | answerable | PASS | 3.3 | git_temelleri.md |
+| 3 | RAG'in klasik fine-tuning'e gore en buyuk avantaji nedir? | answerable | PASS | 4.6 | rag_nedir.md |
+| 4 | SQLite diger veritabani sistemlerinden en cok hangi ozelligiyle ayrilir? | answerable | PASS | 6.5 | veritabani_temelleri.md |
+| 5 | REST API'de GET ve POST komutlari ne ise yarar? | answerable | PASS | 8.3 | api_nedir.md, git_temelleri.md |
+| 6 | LLM'ler metni islerken once ne yapar? | answerable | PASS | 5.9 | rag_nedir.md, yapay_zeka_llm.md |
+| 7 | Veritabanina yeni bir belge nasil eklenir? | answerable | PASS | 5.3 | sss_kurulum.md, veritabani_temelleri.md |
+| 8 | Fransa'nin baskenti neresidir? | unanswerable | PASS | 0.9 | - |
+| 9 | En iyi pizza tarifi nedir? | unanswerable | PASS | 0.8 | - |
+| 10 | Bugun hava nasil? | unanswerable | PASS | 0.8 | - |
+| 11 | JavaScript'te async/await nasil calisir? | unanswerable | FAIL | 8.0 | api_nedir.md, python_temelleri.md |
+| 12 | Python'da async/await ile es zamansiz programlama nasil yapilir? | unanswerable | FAIL | 7.1 | python_temelleri.md |
 
 ## Full answers
 
